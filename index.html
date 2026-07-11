@@ -19,9 +19,7 @@
     --text-dim: #5a7a7e;
     --text-bright: #d8f4f6;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body {
     width: 100%; height: 100%;
     background: var(--void);
@@ -30,154 +28,74 @@
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
   }
-
-  #cesiumContainer {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
+  #cesiumContainer { position: absolute; inset: 0; z-index: 1; }
   .cesium-widget-credits { display: none !important; }
   .cesium-viewer-fullscreenContainer { display: none !important; }
-
   #scanlines {
     position: absolute; inset: 0; z-index: 5;
     pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(79, 216, 224, 0.02) 0px,
-      rgba(79, 216, 224, 0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    );
+    background: repeating-linear-gradient(0deg, rgba(79, 216, 224, 0.02) 0px, rgba(79, 216, 224, 0.02) 1px, transparent 1px, transparent 3px);
   }
-
-  #vignette {
-    position: absolute; inset: 0; z-index: 4;
-    pointer-events: none;
-    box-shadow: inset 0 0 180px 40px rgba(0,0,0,0.75);
-  }
-
+  #vignette { position: absolute; inset: 0; z-index: 4; pointer-events: none; box-shadow: inset 0 0 180px 40px rgba(0,0,0,0.75); }
   #topbar {
     position: absolute; top: 0; left: 0; right: 0; z-index: 10;
     display: flex; justify-content: space-between; align-items: center;
     padding: 14px 16px 10px;
     background: linear-gradient(180deg, rgba(5,8,10,0.95) 0%, rgba(5,8,10,0.6) 70%, transparent 100%);
   }
-
-  #brand {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 4px;
-    color: var(--cyan);
-    text-shadow: 0 0 12px rgba(79,216,224,0.5);
-  }
+  #brand { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 4px; color: var(--cyan); text-shadow: 0 0 12px rgba(79,216,224,0.5); }
   #brand span { color: var(--text-dim); font-weight: 500; font-size: 12px; letter-spacing: 2px; display: block; margin-top: 1px; }
-
-  #clock {
-    text-align: right;
-    font-size: 13px;
-    color: var(--cyan);
-    letter-spacing: 1px;
-  }
+  #clock { text-align: right; font-size: 13px; color: var(--cyan); letter-spacing: 1px; }
   #clock .date { color: var(--text-dim); font-size: 10px; letter-spacing: 2px; }
-
-  #statusstrip {
-    position: absolute; top: 58px; left: 16px; right: 16px; z-index: 10;
-    display: flex; gap: 8px;
-    overflow-x: auto;
-  }
-  .pill {
-    flex: 1; min-width: 70px;
-    background: rgba(10,17,20,0.85);
-    border: 1px solid var(--panel-border);
-    border-radius: 3px;
-    padding: 6px 8px;
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: var(--text-dim);
-    backdrop-filter: blur(4px);
-  }
-  .pill .val {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-bright);
-    display: block;
-    margin-top: 2px;
-    font-family: 'Rajdhani', sans-serif;
-  }
+  #statusstrip { position: absolute; top: 58px; left: 16px; right: 16px; z-index: 10; display: flex; gap: 8px; overflow-x: auto; }
+  .pill { flex: 1; min-width: 70px; background: rgba(10,17,20,0.85); border: 1px solid var(--panel-border); border-radius: 3px; padding: 6px 8px; font-size: 9px; letter-spacing: 1px; color: var(--text-dim); backdrop-filter: blur(4px); }
+  .pill .val { font-size: 15px; font-weight: 700; color: var(--text-bright); display: block; margin-top: 2px; font-family: 'Rajdhani', sans-serif; }
   .pill.warn .val { color: var(--amber); }
   .pill.crit .val { color: var(--red); }
   .pill.ok .val { color: var(--cyan); }
-
   #bottompanel {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
     background: linear-gradient(0deg, rgba(5,8,10,0.97) 0%, rgba(5,8,10,0.75) 75%, transparent 100%);
     padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
   }
-
-  #issline {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--panel-border);
-  }
-  #issdot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--amber);
-    box-shadow: 0 0 8px var(--amber);
-    animation: pulse 1.6s ease-in-out infinite;
-    flex-shrink: 0;
-  }
+  #issline { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--panel-border); }
+  #issdot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 1.6s ease-in-out infinite; flex-shrink: 0; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
   #isstext { font-size: 11px; color: var(--text-dim); letter-spacing: 0.5px; line-height: 1.5; }
   #isstext b { color: var(--amber); font-weight: 700; }
   #isstext .lbl { color: var(--text-dim); }
-
-  #actionrow {
-    display: flex; gap: 10px;
-  }
+  #actionrow { display: flex; gap: 10px; }
   .btn {
-    flex: 1;
-    background: rgba(79,216,224,0.06);
-    border: 1px solid var(--cyan-dim);
-    color: var(--cyan);
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    letter-spacing: 2px;
-    font-size: 13px;
-    padding: 13px 10px;
-    border-radius: 3px;
-    text-transform: uppercase;
+    flex: 1; background: rgba(79,216,224,0.06); border: 1px solid var(--cyan-dim); color: var(--cyan);
+    font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px; font-size: 13px;
+    padding: 13px 10px; border-radius: 3px; text-transform: uppercase;
     display: flex; flex-direction: column; align-items: center; gap: 2px;
   }
   .btn:active { background: rgba(79,216,224,0.18); }
   .btn .sub { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; font-weight: 500; }
-
   #connbadge {
-    position: absolute; top: 58px; right: 16px; z-index: 11;
-    display: none;
-    font-size: 9px; letter-spacing: 1px;
-    color: var(--red);
-    background: rgba(224,90,79,0.1);
-    border: 1px solid var(--red);
-    padding: 3px 8px; border-radius: 2px;
+    position: absolute; top: 58px; right: 16px; z-index: 11; display: none;
+    font-size: 9px; letter-spacing: 1px; color: var(--red); background: rgba(224,90,79,0.1);
+    border: 1px solid var(--red); padding: 3px 8px; border-radius: 2px;
   }
-
   .bracket { position: absolute; width: 18px; height: 18px; z-index: 11; pointer-events: none; opacity: 0.6; }
   .bracket.tl { top: 96px; left: 16px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
   .bracket.tr { top: 96px; right: 16px; border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
+  #debugbox {
+    position: absolute; top: 96px; left: 16px; right: 16px; z-index: 50;
+    background: rgba(20,5,5,0.95); border: 1px solid var(--red); color: var(--red);
+    font-size: 11px; padding: 10px; border-radius: 3px; display: none;
+    white-space: pre-wrap; word-break: break-word; max-height: 40vh; overflow-y: auto;
+  }
 </style>
 </head>
 <body>
-
 <div id="cesiumContainer"></div>
 <div id="scanlines"></div>
 <div id="vignette"></div>
 <div class="bracket tl"></div>
 <div class="bracket tr"></div>
-
+<div id="debugbox"></div>
 <div id="topbar">
   <div id="brand">JARVIS<span>COMMAND CENTER</span></div>
   <div id="clock">
@@ -185,16 +103,13 @@
     <div class="date" id="date">----.--.--</div>
   </div>
 </div>
-
 <div id="connbadge">BACKEND OFFLINE</div>
-
 <div id="statusstrip">
   <div class="pill" id="p-batt">AKKU<span class="val">--%</span></div>
   <div class="pill" id="p-cpu">CPU<span class="val">--%</span></div>
   <div class="pill" id="p-ram">RAM<span class="val">--%</span></div>
   <div class="pill" id="p-storage">SPEICHER<span class="val">--%</span></div>
 </div>
-
 <div id="bottompanel">
   <div id="issline">
     <div id="issdot"></div>
@@ -205,47 +120,39 @@
     </div>
   </div>
   <div id="actionrow">
-    <div class="btn" id="btn-locate">
-      MEIN STANDORT
-      <span class="sub">GPS SYNC</span>
-    </div>
-    <div class="btn" id="btn-iss">
-      ZUR ISS
-      <span class="sub">TRACK</span>
-    </div>
-    <div class="btn" id="btn-refresh">
-      REFRESH
-      <span class="sub">TELEMETRIE</span>
-    </div>
+    <div class="btn" id="btn-locate">MEIN STANDORT<span class="sub">GPS SYNC</span></div>
+    <div class="btn" id="btn-iss">ZUR ISS<span class="sub">TRACK</span></div>
+    <div class="btn" id="btn-refresh">REFRESH<span class="sub">TELEMETRIE</span></div>
   </div>
 </div>
-
 <script>
+function showDebug(msg) {
+  const box = document.getElementById('debugbox');
+  box.style.display = 'block';
+  box.textContent += msg + '\n\n';
+}
+window.onerror = function(msg, url, line, col, error) {
+  showDebug('JS FEHLER: ' + msg + '\nZeile: ' + line + ':' + col);
+  return false;
+};
+if (typeof Cesium === 'undefined') {
+  showDebug('CESIUM SCRIPT NICHT GELADEN (CDN blockiert/nicht erreichbar)');
+}
 const BACKEND_URL = "http://localhost:8000";
 const ISS_API = "https://api.wheretheiss.at/v1/satellites/25544";
-
 Cesium.Ion.defaultAccessToken = undefined;
-
-const viewer = new Cesium.Viewer('cesiumContainer', {
+let viewer;
+try {
+viewer = new Cesium.Viewer('cesiumContainer', {
   imageryProvider: new Cesium.UrlTemplateImageryProvider({
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     credit: ''
   }),
-  baseLayerPicker: false,
-  geocoder: false,
-  homeButton: false,
-  sceneModePicker: false,
-  navigationHelpButton: false,
-  animation: false,
-  timeline: false,
-  fullscreenButton: false,
-  selectionIndicator: false,
-  infoBox: false,
-  skyBox: false,
-  skyAtmosphere: false,
+  baseLayerPicker: false, geocoder: false, homeButton: false, sceneModePicker: false,
+  navigationHelpButton: false, animation: false, timeline: false, fullscreenButton: false,
+  selectionIndicator: false, infoBox: false, skyBox: false, skyAtmosphere: false,
   contextOptions: { webgl: { alpha: true } }
 });
-
 viewer.scene.globe.baseColor = Cesium.Color.fromCssColorString('#05080a');
 viewer.scene.backgroundColor = Cesium.Color.fromCssColorString('#05080a');
 viewer.scene.globe.showGroundAtmosphere = false;
@@ -254,36 +161,24 @@ viewer.scene.globe.enableLighting = true;
 viewer.scene.skyBox = undefined;
 viewer.scene.moon = undefined;
 viewer.scene.sun = undefined;
-
 viewer.scene.globe.imageryLayers.get(0).brightness = 0.55;
 viewer.scene.globe.imageryLayers.get(0).contrast = 1.3;
 viewer.scene.globe.imageryLayers.get(0).hue = 0.5;
 viewer.scene.globe.imageryLayers.get(0).saturation = 0.4;
-
-viewer.camera.flyTo({
-  destination: Cesium.Cartesian3.fromDegrees(10, 20, 22000000)
-});
-
-let issEntity = viewer.entities.add({
+viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(10, 20, 22000000) });
+} catch (e) {
+  showDebug('CESIUM INIT FEHLER: ' + e.message + '\n' + (e.stack || ''));
+}
+let issEntity = null;
+if (viewer) {
+issEntity = viewer.entities.add({
   id: 'iss',
   position: Cesium.Cartesian3.fromDegrees(0, 0, 400000),
-  point: {
-    pixelSize: 10,
-    color: Cesium.Color.fromCssColorString('#e0a84f'),
-    outlineColor: Cesium.Color.fromCssColorString('#05080a'),
-    outlineWidth: 2
-  },
-  label: {
-    text: 'ISS',
-    font: '12px JetBrains Mono',
-    fillColor: Cesium.Color.fromCssColorString('#e0a84f'),
-    pixelOffset: new Cesium.Cartesian2(0, -18),
-    showBackground: false
-  }
+  point: { pixelSize: 10, color: Cesium.Color.fromCssColorString('#e0a84f'), outlineColor: Cesium.Color.fromCssColorString('#05080a'), outlineWidth: 2 },
+  label: { text: 'ISS', font: '12px JetBrains Mono', fillColor: Cesium.Color.fromCssColorString('#e0a84f'), pixelOffset: new Cesium.Cartesian2(0, -18), showBackground: false }
 });
-
+}
 let userEntity = null;
-
 function updateClock() {
   const now = new Date();
   document.getElementById('time').textContent = now.toLocaleTimeString('de-DE', { hour12: false });
@@ -291,17 +186,13 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
-
 async function updateISS() {
   try {
     const res = await fetch(ISS_API);
     const data = await res.json();
     const lat = data.latitude, lon = data.longitude, alt = data.altitude, vel = data.velocity;
-
-    issEntity.position = Cesium.Cartesian3.fromDegrees(lon, lat, alt * 1000);
-
-    document.getElementById('iss-coords').textContent =
-      `${lat.toFixed(2)}°  ${lon.toFixed(2)}°`;
+    if (issEntity) issEntity.position = Cesium.Cartesian3.fromDegrees(lon, lat, alt * 1000);
+    document.getElementById('iss-coords').textContent = `${lat.toFixed(2)}°  ${lon.toFixed(2)}°`;
     document.getElementById('iss-alt').textContent = alt.toFixed(0);
     document.getElementById('iss-vel').textContent = vel.toFixed(0);
   } catch (e) {
@@ -310,8 +201,8 @@ async function updateISS() {
 }
 updateISS();
 setInterval(updateISS, 8000);
-
 document.getElementById('btn-iss').addEventListener('click', () => {
+  if (!viewer || !issEntity) return;
   const pos = issEntity.position.getValue(Cesium.JulianDate.now());
   if (pos) {
     viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(
@@ -321,20 +212,17 @@ document.getElementById('btn-iss').addEventListener('click', () => {
     )});
   }
 });
-
 function setPill(id, value, level) {
   const el = document.getElementById(id);
   el.classList.remove('ok','warn','crit');
   if (level) el.classList.add(level);
   el.querySelector('.val').textContent = value;
 }
-
 async function fetchTelemetry() {
   try {
     const res = await fetch(`${BACKEND_URL}/telemetry`, { signal: AbortSignal.timeout(5000) });
     const data = await res.json();
     document.getElementById('connbadge').style.display = 'none';
-
     if (data.battery && data.battery.percentage !== undefined) {
       const pct = data.battery.percentage;
       setPill('p-batt', pct + '%', pct < 20 ? 'crit' : pct < 40 ? 'warn' : 'ok');
@@ -343,9 +231,7 @@ async function fetchTelemetry() {
       if (data.cpu.cpu_percent !== null && data.cpu.cpu_percent !== undefined) {
         const c = data.cpu.cpu_percent;
         setPill('p-cpu', c.toFixed(0) + '%', c > 80 ? 'crit' : c > 50 ? 'warn' : 'ok');
-      } else {
-        setPill('p-cpu', 'N/A', null);
-      }
+      } else { setPill('p-cpu', 'N/A', null); }
       if (data.cpu.ram_percent !== null && data.cpu.ram_percent !== undefined) {
         const r = data.cpu.ram_percent;
         setPill('p-ram', r.toFixed(0) + '%', r > 85 ? 'crit' : r > 60 ? 'warn' : 'ok');
@@ -361,34 +247,19 @@ async function fetchTelemetry() {
 }
 fetchTelemetry();
 setInterval(fetchTelemetry, 10000);
-
 document.getElementById('btn-refresh').addEventListener('click', fetchTelemetry);
-
 document.getElementById('btn-locate').addEventListener('click', async () => {
   try {
     const res = await fetch(`${BACKEND_URL}/location`, { signal: AbortSignal.timeout(16000) });
     const data = await res.json();
-    if (data.latitude && data.longitude) {
+    if (data.latitude && data.longitude && viewer) {
       if (userEntity) viewer.entities.remove(userEntity);
       userEntity = viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 0),
-        point: {
-          pixelSize: 10,
-          color: Cesium.Color.fromCssColorString('#4fd8e0'),
-          outlineColor: Cesium.Color.fromCssColorString('#05080a'),
-          outlineWidth: 2
-        },
-        label: {
-          text: 'DU',
-          font: '12px JetBrains Mono',
-          fillColor: Cesium.Color.fromCssColorString('#4fd8e0'),
-          pixelOffset: new Cesium.Cartesian2(0, -18),
-          showBackground: false
-        }
+        point: { pixelSize: 10, color: Cesium.Color.fromCssColorString('#4fd8e0'), outlineColor: Cesium.Color.fromCssColorString('#05080a'), outlineWidth: 2 },
+        label: { text: 'DU', font: '12px JetBrains Mono', fillColor: Cesium.Color.fromCssColorString('#4fd8e0'), pixelOffset: new Cesium.Cartesian2(0, -18), showBackground: false }
       });
-      viewer.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 500000)
-      });
+      viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 500000) });
     }
   } catch (e) {
     document.getElementById('connbadge').style.display = 'block';
@@ -396,4 +267,4 @@ document.getElementById('btn-locate').addEventListener('click', async () => {
 });
 </script>
 </body>
-      </html>
+</html>
