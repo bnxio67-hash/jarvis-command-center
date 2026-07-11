@@ -9,40 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --void: #05080a;
-    --panel: #0a1114;
-    --panel-border: #1a2f33;
-    --cyan: #4fd8e0;
-    --cyan-dim: #2a6b70;
-    --amber: #e0a84f;
-    --red: #e05a4f;
-    --text-dim: #5a7a7e;
-    --text-bright: #d8f4f6;
+    --void: #05080a; --panel: #0a1114; --panel-border: #1a2f33;
+    --cyan: #4fd8e0; --cyan-dim: #2a6b70; --amber: #e0a84f; --red: #e05a4f;
+    --text-dim: #5a7a7e; --text-bright: #d8f4f6;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    width: 100%; height: 100%;
-    background: var(--void);
-    color: var(--text-bright);
-    font-family: 'JetBrains Mono', monospace;
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-  }
+  html, body { width: 100%; height: 100%; background: var(--void); color: var(--text-bright); font-family: 'JetBrains Mono', monospace; overflow: hidden; -webkit-tap-highlight-color: transparent; }
   #cesiumContainer { position: absolute; inset: 0; z-index: 1; }
   .cesium-widget-credits { display: none !important; }
   .cesium-viewer-fullscreenContainer { display: none !important; }
-  #scanlines {
-    position: absolute; inset: 0; z-index: 5;
-    pointer-events: none;
-    background: repeating-linear-gradient(0deg, rgba(79, 216, 224, 0.02) 0px, rgba(79, 216, 224, 0.02) 1px, transparent 1px, transparent 3px);
-  }
+  #scanlines { position: absolute; inset: 0; z-index: 5; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(79, 216, 224, 0.02) 0px, rgba(79, 216, 224, 0.02) 1px, transparent 1px, transparent 3px); }
   #vignette { position: absolute; inset: 0; z-index: 4; pointer-events: none; box-shadow: inset 0 0 180px 40px rgba(0,0,0,0.75); }
-  #topbar {
-    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 16px 10px;
-    background: linear-gradient(180deg, rgba(5,8,10,0.95) 0%, rgba(5,8,10,0.6) 70%, transparent 100%);
-  }
+  #topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 10px; background: linear-gradient(180deg, rgba(5,8,10,0.95) 0%, rgba(5,8,10,0.6) 70%, transparent 100%); }
   #brand { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 4px; color: var(--cyan); text-shadow: 0 0 12px rgba(79,216,224,0.5); }
   #brand span { color: var(--text-dim); font-weight: 500; font-size: 12px; letter-spacing: 2px; display: block; margin-top: 1px; }
   #clock { text-align: right; font-size: 13px; color: var(--cyan); letter-spacing: 1px; }
@@ -53,11 +31,7 @@
   .pill.warn .val { color: var(--amber); }
   .pill.crit .val { color: var(--red); }
   .pill.ok .val { color: var(--cyan); }
-  #bottompanel {
-    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
-    background: linear-gradient(0deg, rgba(5,8,10,0.97) 0%, rgba(5,8,10,0.75) 75%, transparent 100%);
-    padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
-  }
+  #bottompanel { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; background: linear-gradient(0deg, rgba(5,8,10,0.97) 0%, rgba(5,8,10,0.75) 75%, transparent 100%); padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); }
   #issline { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--panel-border); }
   #issdot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 1.6s ease-in-out infinite; flex-shrink: 0; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -65,28 +39,14 @@
   #isstext b { color: var(--amber); font-weight: 700; }
   #isstext .lbl { color: var(--text-dim); }
   #actionrow { display: flex; gap: 10px; }
-  .btn {
-    flex: 1; background: rgba(79,216,224,0.06); border: 1px solid var(--cyan-dim); color: var(--cyan);
-    font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px; font-size: 13px;
-    padding: 13px 10px; border-radius: 3px; text-transform: uppercase;
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-  }
+  .btn { flex: 1; background: rgba(79,216,224,0.06); border: 1px solid var(--cyan-dim); color: var(--cyan); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 2px; font-size: 13px; padding: 13px 10px; border-radius: 3px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .btn:active { background: rgba(79,216,224,0.18); }
   .btn .sub { font-size: 8px; color: var(--text-dim); letter-spacing: 1px; font-weight: 500; }
-  #connbadge {
-    position: absolute; top: 58px; right: 16px; z-index: 11; display: none;
-    font-size: 9px; letter-spacing: 1px; color: var(--red); background: rgba(224,90,79,0.1);
-    border: 1px solid var(--red); padding: 3px 8px; border-radius: 2px;
-  }
+  #connbadge { position: absolute; top: 58px; right: 16px; z-index: 11; display: none; font-size: 9px; letter-spacing: 1px; color: var(--red); background: rgba(224,90,79,0.1); border: 1px solid var(--red); padding: 3px 8px; border-radius: 2px; }
   .bracket { position: absolute; width: 18px; height: 18px; z-index: 11; pointer-events: none; opacity: 0.6; }
   .bracket.tl { top: 96px; left: 16px; border-top: 2px solid var(--cyan); border-left: 2px solid var(--cyan); }
   .bracket.tr { top: 96px; right: 16px; border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
-  #debugbox {
-    position: absolute; top: 96px; left: 16px; right: 16px; z-index: 50;
-    background: rgba(20,5,5,0.95); border: 1px solid var(--red); color: var(--red);
-    font-size: 11px; padding: 10px; border-radius: 3px; display: none;
-    white-space: pre-wrap; word-break: break-word; max-height: 40vh; overflow-y: auto;
-  }
+  #debugbox { position: absolute; top: 96px; left: 16px; right: 16px; z-index: 50; background: rgba(20,5,5,0.95); border: 1px solid var(--red); color: var(--red); font-size: 11px; padding: 10px; border-radius: 3px; display: none; white-space: pre-wrap; word-break: break-word; max-height: 40vh; overflow-y: auto; }
 </style>
 </head>
 <body>
@@ -135,19 +95,14 @@ window.onerror = function(msg, url, line, col, error) {
   showDebug('JS FEHLER: ' + msg + '\nZeile: ' + line + ':' + col);
   return false;
 };
-if (typeof Cesium === 'undefined') {
-  showDebug('CESIUM SCRIPT NICHT GELADEN (CDN blockiert/nicht erreichbar)');
-}
+if (typeof Cesium === 'undefined') { showDebug('CESIUM SCRIPT NICHT GELADEN (CDN blockiert/nicht erreichbar)'); }
 const BACKEND_URL = "http://localhost:8000";
 const ISS_API = "https://api.wheretheiss.at/v1/satellites/25544";
 Cesium.Ion.defaultAccessToken = undefined;
 let viewer;
 try {
 viewer = new Cesium.Viewer('cesiumContainer', {
-  imageryProvider: new Cesium.UrlTemplateImageryProvider({
-    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    credit: ''
-  }),
+  imageryProvider: new Cesium.UrlTemplateImageryProvider({ url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', credit: '' }),
   baseLayerPicker: false, geocoder: false, homeButton: false, sceneModePicker: false,
   navigationHelpButton: false, animation: false, timeline: false, fullscreenButton: false,
   selectionIndicator: false, infoBox: false, skyBox: false, skyAtmosphere: false,
@@ -158,13 +113,14 @@ viewer.scene.backgroundColor = Cesium.Color.fromCssColorString('#05080a');
 viewer.scene.globe.showGroundAtmosphere = false;
 viewer.scene.fog.enabled = false;
 viewer.scene.globe.enableLighting = true;
-viewer.scene.skyBox = undefined;
-viewer.scene.moon = undefined;
-viewer.scene.sun = undefined;
-viewer.scene.globe.imageryLayers.get(0).brightness = 0.55;
-viewer.scene.globe.imageryLayers.get(0).contrast = 1.3;
-viewer.scene.globe.imageryLayers.get(0).hue = 0.5;
-viewer.scene.globe.imageryLayers.get(0).saturation = 0.4;
+try { viewer.scene.skyBox = undefined; } catch(e) {}
+try { viewer.scene.moon = undefined; } catch(e) {}
+try { viewer.scene.sun = undefined; } catch(e) {}
+const _layers = viewer.scene.globe.imageryLayers;
+if (_layers && _layers.length > 0) {
+  const _layer0 = _layers.get(0);
+  if (_layer0) { _layer0.brightness = 0.55; _layer0.contrast = 1.3; _layer0.hue = 0.5; _layer0.saturation = 0.4; }
+}
 viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(10, 20, 22000000) });
 } catch (e) {
   showDebug('CESIUM INIT FEHLER: ' + e.message + '\n' + (e.stack || ''));
@@ -172,8 +128,7 @@ viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(10, 20, 2200000
 let issEntity = null;
 if (viewer) {
 issEntity = viewer.entities.add({
-  id: 'iss',
-  position: Cesium.Cartesian3.fromDegrees(0, 0, 400000),
+  id: 'iss', position: Cesium.Cartesian3.fromDegrees(0, 0, 400000),
   point: { pixelSize: 10, color: Cesium.Color.fromCssColorString('#e0a84f'), outlineColor: Cesium.Color.fromCssColorString('#05080a'), outlineWidth: 2 },
   label: { text: 'ISS', font: '12px JetBrains Mono', fillColor: Cesium.Color.fromCssColorString('#e0a84f'), pixelOffset: new Cesium.Cartesian2(0, -18), showBackground: false }
 });
@@ -195,9 +150,7 @@ async function updateISS() {
     document.getElementById('iss-coords').textContent = `${lat.toFixed(2)}°  ${lon.toFixed(2)}°`;
     document.getElementById('iss-alt').textContent = alt.toFixed(0);
     document.getElementById('iss-vel').textContent = vel.toFixed(0);
-  } catch (e) {
-    document.getElementById('iss-coords').textContent = 'SIGNAL VERLOREN';
-  }
+  } catch (e) { document.getElementById('iss-coords').textContent = 'SIGNAL VERLOREN'; }
 }
 updateISS();
 setInterval(updateISS, 8000);
@@ -207,8 +160,7 @@ document.getElementById('btn-iss').addEventListener('click', () => {
   if (pos) {
     viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(
       Cesium.Math.toDegrees(Cesium.Cartographic.fromCartesian(pos).longitude),
-      Cesium.Math.toDegrees(Cesium.Cartographic.fromCartesian(pos).latitude),
-      3000000
+      Cesium.Math.toDegrees(Cesium.Cartographic.fromCartesian(pos).latitude), 3000000
     )});
   }
 });
@@ -241,9 +193,7 @@ async function fetchTelemetry() {
       const s = data.storage.percent_used;
       setPill('p-storage', s.toFixed(0) + '%', s > 90 ? 'crit' : s > 75 ? 'warn' : 'ok');
     }
-  } catch (e) {
-    document.getElementById('connbadge').style.display = 'block';
-  }
+  } catch (e) { document.getElementById('connbadge').style.display = 'block'; }
 }
 fetchTelemetry();
 setInterval(fetchTelemetry, 10000);
@@ -261,9 +211,7 @@ document.getElementById('btn-locate').addEventListener('click', async () => {
       });
       viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 500000) });
     }
-  } catch (e) {
-    document.getElementById('connbadge').style.display = 'block';
-  }
+  } catch (e) { document.getElementById('connbadge').style.display = 'block'; }
 });
 </script>
 </body>
