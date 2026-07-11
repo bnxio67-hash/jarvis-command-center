@@ -1,0 +1,8 @@
+.env
+*.pyc
+__pycache__/
+venv/
+.jarvis_pids
+logs/
+models/
+*.wav
