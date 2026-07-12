@@ -183,11 +183,17 @@ async function fetchTelemetry() {
       if (data.cpu.cpu_percent !== null && data.cpu.cpu_percent !== undefined) {
         const c = data.cpu.cpu_percent;
         setPill('p-cpu', c.toFixed(0) + '%', c > 80 ? 'crit' : c > 50 ? 'warn' : 'ok');
-      } else { setPill('p-cpu', 'N/A', null); }
+      } else {
+        setPill('p-cpu', 'N/A', null);
+        showDebug('CPU FEHLT IM BACKEND-RESPONSE. data.cpu = ' + JSON.stringify(data.cpu));
+      }
       if (data.cpu.ram_percent !== null && data.cpu.ram_percent !== undefined) {
         const r = data.cpu.ram_percent;
         setPill('p-ram', r.toFixed(0) + '%', r > 85 ? 'crit' : r > 60 ? 'warn' : 'ok');
       }
+    } else {
+      setPill('p-cpu', 'N/A', null);
+      showDebug('KEIN "cpu" OBJEKT IM RESPONSE. Voller Response: ' + JSON.stringify(data));
     }
     if (data.storage) {
       const s = data.storage.percent_used;
@@ -198,20 +204,39 @@ async function fetchTelemetry() {
 fetchTelemetry();
 setInterval(fetchTelemetry, 10000);
 document.getElementById('btn-refresh').addEventListener('click', fetchTelemetry);
-document.getElementById('btn-locate').addEventListener('click', async () => {
-  try {
-    const res = await fetch(`${BACKEND_URL}/location`, { signal: AbortSignal.timeout(16000) });
-    const data = await res.json();
-    if (data.latitude && data.longitude && viewer) {
-      if (userEntity) viewer.entities.remove(userEntity);
-      userEntity = viewer.entities.add({
-        position: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 0),
-        point: { pixelSize: 10, color: Cesium.Color.fromCssColorString('#4fd8e0'), outlineColor: Cesium.Color.fromCssColorString('#05080a'), outlineWidth: 2 },
-        label: { text: 'DU', font: '12px JetBrains Mono', fillColor: Cesium.Color.fromCssColorString('#4fd8e0'), pixelOffset: new Cesium.Cartesian2(0, -18), showBackground: false }
-      });
-      viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(data.longitude, data.latitude, 500000) });
-    }
-  } catch (e) { document.getElementById('connbadge').style.display = 'block'; }
+function placeUserMarker(lat, lon) {
+  if (!viewer) return;
+  if (userEntity) viewer.entities.remove(userEntity);
+  userEntity = viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(lon, lat, 0),
+    point: { pixelSize: 10, color: Cesium.Color.fromCssColorString('#4fd8e0'), outlineColor: Cesium.Color.fromCssColorString('#05080a'), outlineWidth: 2 },
+    label: { text: 'DU', font: '12px JetBrains Mono', fillColor: Cesium.Color.fromCssColorString('#4fd8e0'), pixelOffset: new Cesium.Cartesian2(0, -18), showBackground: false }
+  });
+  viewer.camera.flyTo({ destination: Cesium.Cartesian3.fromDegrees(lon, lat, 500000) });
+}
+document.getElementById('btn-locate').addEventListener('click', () => {
+  if (!navigator.geolocation) {
+    showDebug('GEOLOCATION WIRD VOM BROWSER NICHT UNTERSTÜTZT');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    (pos) => { placeUserMarker(pos.coords.latitude, pos.coords.longitude); },
+    (err) => {
+      // Fallback: try backend if browser geolocation is denied/unavailable
+      showDebug('BROWSER-GPS FEHLGESCHLAGEN: ' + err.message + ' -- Versuche Backend...');
+      fetch(`${BACKEND_URL}/location`, { signal: AbortSignal.timeout(16000) })
+        .then(res => res.json())
+        .then(data => {
+          if (data.latitude && data.longitude) { placeUserMarker(data.latitude, data.longitude); }
+          else { showDebug('BACKEND-STANDORT OHNE KOORDINATEN: ' + JSON.stringify(data)); }
+        })
+        .catch(e => {
+          document.getElementById('connbadge').style.display = 'block';
+          showDebug('BACKEND-STANDORT FEHLGESCHLAGEN: ' + e.message);
+        });
+    },
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+  );
 });
 </script>
 </body>
